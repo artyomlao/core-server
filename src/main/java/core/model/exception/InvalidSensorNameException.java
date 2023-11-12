@@ -1,4 +1,4 @@
-package core.exception;
+package core.model.exception;
 
 public class InvalidSensorNameException extends RuntimeException {
 

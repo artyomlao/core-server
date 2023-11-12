@@ -1,9 +1,9 @@
 package core.service;
 
 import core.entity.RegisteredSensorEntity;
-import core.exception.InvalidSensorNameException;
 import core.model.KeyModel;
 import core.model.NameModel;
+import core.model.exception.InvalidSensorNameException;
 import core.repository.SensorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
