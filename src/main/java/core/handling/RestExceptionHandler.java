@@ -1,6 +1,5 @@
 package core.handling;
 
-import core.model.exception.InvalidSensorNameException;
 import core.model.CustomResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RestExceptionHandler {
 
     @ResponseBody
-    @ExceptionHandler({InvalidSensorNameException.class})
-    public ResponseEntity<?> handleFieldException(final InvalidSensorNameException e) {
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<?> handleFieldException(final Exception e) {
         return new ResponseEntity<>(new CustomResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
 }

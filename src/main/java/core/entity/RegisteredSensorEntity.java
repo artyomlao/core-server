@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 @Table(name = "registered_sensor")
 @Entity
-@Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class RegisteredSensorEntity {
 
     @Id
@@ -26,4 +28,7 @@ public class RegisteredSensorEntity {
 
     @Column(name = "key")
     private String key;
+
+    @OneToMany(mappedBy = "sensor")
+    private List<MeasurementEntity> measurements;
 }
