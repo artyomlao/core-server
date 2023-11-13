@@ -1,6 +1,7 @@
 package core.controller;
 
 import core.entity.MeasurementEntity;
+import core.entity.RegisteredSensorEntity;
 import core.model.KeyModel;
 import core.model.MeasurementsModel;
 import core.model.NameModel;
@@ -8,6 +9,8 @@ import core.service.SensorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/sensors")
@@ -25,10 +28,15 @@ public class SensorsController {
         return ResponseEntity.ok(sensorsService.registerSensor(nameModel));
     }
 
-    @PostMapping("{key}/measurements")
+    @PostMapping("/{key}/measurements")
     public ResponseEntity<MeasurementEntity> measurements(
             final @RequestBody MeasurementsModel measurementsModel, @PathVariable final String key) {
 
         return ResponseEntity.ok(sensorsService.registerInfo(measurementsModel, key));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<RegisteredSensorEntity>> sensors() {
+        return ResponseEntity.ok(sensorsService.selectAllActive());
     }
 }

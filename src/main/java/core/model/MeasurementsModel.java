@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MeasurementsModel {
 
-    private Long value;
+    private Double value;
     private Boolean raining;
 }

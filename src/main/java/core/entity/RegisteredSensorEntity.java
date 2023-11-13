@@ -1,5 +1,6 @@
 package core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,10 @@ public class RegisteredSensorEntity {
     @Column(name = "key")
     private String key;
 
-    @OneToMany(mappedBy = "sensor")
+    @Column(name = "active")
+    private boolean active;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sensor", fetch = FetchType.EAGER)
     private List<MeasurementEntity> measurements;
 }

@@ -26,7 +26,7 @@ public class MeasurementEntity {
     private long id;
 
     @Column(name = "value")
-    private Long value;
+    private Double value;
 
     @Convert(converter = LongToBooleanConverter.class)
     @Column(name = "raining")

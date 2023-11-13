@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -65,5 +66,29 @@ public class SensorsService {
                 .setRaining(model.getRaining())
                 .setSensorId(entity.getId())
                 .setServerTime(Timestamp.valueOf(LocalDateTime.now())));
+    }
+
+    public void disableSensors() {
+        final List<RegisteredSensorEntity> sensors = sensorsRepository.findAll();
+
+        sensors.forEach(sensor -> {
+            final List<MeasurementEntity> measurements = sensor.getMeasurements();
+            final int indexToCheck = measurements.size() != 0 ? measurements.size() - 1 : 0;
+
+            if (indexToCheck == 0) {
+                sensorsRepository.save(sensor.setActive(false));
+                return;
+            }
+
+            final MeasurementEntity entity = measurements.get(indexToCheck);
+
+            if (System.currentTimeMillis() - entity.getServerTime().getTime() > 60000) {
+                sensorsRepository.save(sensor.setActive(false));
+            }
+        });
+    }
+
+    public List<RegisteredSensorEntity> selectAllActive() {
+        return sensorsRepository.findAllByActive(true);
     }
 }
